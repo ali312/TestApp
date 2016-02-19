@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "SocketClient.h"
+
+static NSString *const kApiKey = @"ApiKey";
 
 @interface AppDelegate ()
 
@@ -17,6 +20,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[SocketClient shared] open];
+    
     return YES;
 }
 
@@ -40,6 +46,17 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Help Methods
+
+- (void)setUpInitialViewController {
+    NSString *apiKey = [[NSUserDefaults standardUserDefaults] stringForKey:kApiKey];
+    if (apiKey.length > 0) {
+        
+    } else {
+        
+    }
 }
 
 @end
