@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kUserLoggedIn;
+extern NSString *const kUserLoggedOut;
+
 @interface SocketClient : NSObject
+
+@property (nonatomic, strong, readonly) NSString *currentToken;
+@property (nonatomic, strong, readonly) NSDate *expirationDate;
 
 + (instancetype)shared;
 
@@ -20,5 +26,7 @@
 - (void)loginWithEmail:(NSString *)email
               password:(NSString *)password
        completionBlock:(void (^)(BOOL success, NSDictionary *response))completionBlock;
+
+- (void)logout;
 
 @end

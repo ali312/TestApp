@@ -10,13 +10,14 @@
 		30EFF5A3F62E5A71F6369B43 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0E1C7762310EADCAAF7B1B /* libPods.a */; };
 		EDC6F0951C7767A3004DAD82 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F0941C7767A3004DAD82 /* main.m */; };
 		EDC6F0981C7767A3004DAD82 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F0971C7767A3004DAD82 /* AppDelegate.m */; };
-		EDC6F09B1C7767A3004DAD82 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F09A1C7767A3004DAD82 /* ViewController.m */; };
+		EDC6F09B1C7767A3004DAD82 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F09A1C7767A3004DAD82 /* LoginViewController.m */; };
 		EDC6F09E1C7767A3004DAD82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDC6F09C1C7767A3004DAD82 /* Main.storyboard */; };
 		EDC6F0A01C7767A3004DAD82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDC6F09F1C7767A3004DAD82 /* Assets.xcassets */; };
 		EDC6F0A31C7767A3004DAD82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDC6F0A11C7767A3004DAD82 /* LaunchScreen.storyboard */; };
 		EDC6F0AE1C7767A3004DAD82 /* TestAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F0AD1C7767A3004DAD82 /* TestAppTests.m */; };
 		EDC6F0B91C7767A4004DAD82 /* TestAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F0B81C7767A4004DAD82 /* TestAppUITests.m */; };
 		EDC6F0C91C776950004DAD82 /* SocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F0C81C776950004DAD82 /* SocketClient.m */; };
+		EDC6F0CC1C778B4E004DAD82 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F0CB1C778B4E004DAD82 /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +45,8 @@
 		EDC6F0941C7767A3004DAD82 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EDC6F0961C7767A3004DAD82 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EDC6F0971C7767A3004DAD82 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EDC6F0991C7767A3004DAD82 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EDC6F09A1C7767A3004DAD82 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EDC6F0991C7767A3004DAD82 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		EDC6F09A1C7767A3004DAD82 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		EDC6F09D1C7767A3004DAD82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EDC6F09F1C7767A3004DAD82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDC6F0A21C7767A3004DAD82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,6 +59,8 @@
 		EDC6F0BA1C7767A4004DAD82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDC6F0C71C776950004DAD82 /* SocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocketClient.h; path = Sockets/SocketClient.h; sourceTree = "<group>"; };
 		EDC6F0C81C776950004DAD82 /* SocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocketClient.m; path = Sockets/SocketClient.m; sourceTree = "<group>"; };
+		EDC6F0CA1C778B4E004DAD82 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		EDC6F0CB1C778B4E004DAD82 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +134,10 @@
 				EDC6F0C61C776919004DAD82 /* Sockets */,
 				EDC6F0961C7767A3004DAD82 /* AppDelegate.h */,
 				EDC6F0971C7767A3004DAD82 /* AppDelegate.m */,
-				EDC6F0991C7767A3004DAD82 /* ViewController.h */,
-				EDC6F09A1C7767A3004DAD82 /* ViewController.m */,
+				EDC6F0991C7767A3004DAD82 /* LoginViewController.h */,
+				EDC6F09A1C7767A3004DAD82 /* LoginViewController.m */,
+				EDC6F0CA1C778B4E004DAD82 /* MainViewController.h */,
+				EDC6F0CB1C778B4E004DAD82 /* MainViewController.m */,
 				EDC6F09C1C7767A3004DAD82 /* Main.storyboard */,
 				EDC6F09F1C7767A3004DAD82 /* Assets.xcassets */,
 				EDC6F0A11C7767A3004DAD82 /* LaunchScreen.storyboard */,
@@ -342,9 +347,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDC6F09B1C7767A3004DAD82 /* ViewController.m in Sources */,
+				EDC6F09B1C7767A3004DAD82 /* LoginViewController.m in Sources */,
 				EDC6F0C91C776950004DAD82 /* SocketClient.m in Sources */,
 				EDC6F0981C7767A3004DAD82 /* AppDelegate.m in Sources */,
+				EDC6F0CC1C778B4E004DAD82 /* MainViewController.m in Sources */,
 				EDC6F0951C7767A3004DAD82 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,6 +492,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thelightprj.TestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -498,6 +505,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thelightprj.TestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

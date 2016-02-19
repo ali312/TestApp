@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "SocketClient.h"
 
+#import "MainViewController.h"
+#import "LoginViewController.h"
+
 static NSString *const kApiKey = @"ApiKey";
 
 @interface AppDelegate ()
@@ -22,6 +25,18 @@ static NSString *const kApiKey = @"ApiKey";
     // Override point for customization after application launch.
     
     [[SocketClient shared] open];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(setUpInitialViewController)
+                                                 name:kUserLoggedIn
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(setUpInitialViewController)
+                                                 name:kUserLoggedOut
+                                               object:nil];
+    
+    [self setUpInitialViewController];
     
     return YES;
 }
@@ -51,11 +66,16 @@ static NSString *const kApiKey = @"ApiKey";
 #pragma mark - Help Methods
 
 - (void)setUpInitialViewController {
-    NSString *apiKey = [[NSUserDefaults standardUserDefaults] stringForKey:kApiKey];
-    if (apiKey.length > 0) {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    
+    if ([[SocketClient shared] isLoggedIn]) {
+        MainViewController *mainVC = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
         
+        self.window.rootViewController = mainVC;
     } else {
+        LoginViewController *logInVC = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         
+        self.window.rootViewController = logInVC;
     }
 }
 

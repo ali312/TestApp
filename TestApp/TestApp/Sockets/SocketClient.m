@@ -11,6 +11,9 @@
 
 static NSString *const SocketURLString = @"ws://52.29.182.220:8080/customer-gateway/customer";
 
+NSString *const kUserLoggedIn = @"UserLoggedIn";
+NSString *const kUserLoggedOut = @"UserLoggedOut";
+
 @interface SocketClient () <SRWebSocketDelegate>
 
 @property (nonatomic, copy) void (^loginCompletionBlick)(BOOL success, NSDictionary *response);
@@ -31,6 +34,17 @@ static NSString *const SocketURLString = @"ws://52.29.182.220:8080/customer-gate
     });
     
     return sharedInstance_;
+}
+
+- (instancetype)init {
+    self = [super init];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    _currentToken  = [defaults stringForKey:@"api_token"];
+    _expirationDate = [defaults objectForKey:@"api_token_expiration_date"];
+    
+    return self;
 }
 
 #pragma mark - Connection Handling
@@ -60,10 +74,10 @@ static NSString *const SocketURLString = @"ws://52.29.182.220:8080/customer-gate
               password:(NSString *)password
        completionBlock:(void (^)(BOOL success, NSDictionary *response))completionBlock {
     _loginCompletionBlick = completionBlock;
-    
+    currentMessageID_++;
     [self sendMessageWithDictionary:@{
                                       @"type" : @"LOGIN_CUSTOMER",
-                                      @"sequence_id":@(currentMessageID_),
+                                      @"sequence_id":@(currentMessageID_).stringValue,
                                       @"data": @{
                                               @"email":email,
                                               @"password":password
@@ -75,6 +89,15 @@ static NSString *const SocketURLString = @"ws://52.29.182.220:8080/customer-gate
                                                         selector:@selector(timeOutLogin)
                                                         userInfo:nil
                                                          repeats:NO];
+}
+
+- (void)logout {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"api_token_expiration_date"];
+    [defaults removeObjectForKey:@"api_token"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoggedOut
+                                                        object:nil];
 }
 
 - (BOOL)isLoggedIn {
@@ -130,31 +153,46 @@ static NSString *const SocketURLString = @"ws://52.29.182.220:8080/customer-gate
     NSString *sequenceId = dict[@"sequence_id"];
     NSDictionary *data = dict[@"data"];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     if (sequenceId.integerValue == currentMessageID_) {
         if ([type isEqualToString:@"CUSTOMER_API_TOKEN"]) {
             [currentLoginTimer_ invalidate];
             
             NSString *apiToken = data[@"api_token"];
+            _currentToken = apiToken;
+            
             NSString *expiration_string = data[@"api_token_expiration_date"];
             
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"'dd'-'MM'-'yyyy'T'HH':'mm':'ss'Z'"];
+            [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
             NSDate *dateFromString = [dateFormatter dateFromString:expiration_string];
-            
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            _expirationDate = dateFromString;
             
             [defaults setObject:dateFromString
                          forKey:@"api_token_expiration_date"];
             
             [defaults setObject:apiToken
                          forKey:@"api_token"];
+            
             [defaults synchronize];
             
             if (_loginCompletionBlick != nil) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoggedIn
+                                                                    object:nil];
+                
                 _loginCompletionBlick(YES, data);
                 _loginCompletionBlick = nil;
             }
-        } else if ([type isEqualToString:@"CUSTOMER_ERROR"]) {
+        } else {
+            [defaults removeObjectForKey:@"api_token_expiration_date"];
+            [defaults removeObjectForKey:@"api_token"];
+            
+            [defaults synchronize];
+            
+            _currentToken = nil;
+            _expirationDate = nil;
+            
             [currentLoginTimer_ invalidate];
             if (_loginCompletionBlick != nil) {
                 _loginCompletionBlick(NO, data);
